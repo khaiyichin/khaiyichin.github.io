@@ -1,11 +1,13 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <!--
-	TXT by HTML5 UP	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)-->
+	TXT by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Khai Yi Chin | My Portfolio</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,">
     <link rel="shortcut icon" href="images/K%20Favicon.ico" type="image/x-icon">
     <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -19,10 +21,10 @@
         <div class="logo container">
           <div>
             <h1><a id="logo">KHAI YI CHIN</a></h1>
-            <!-- <p>My Portfolio</p> -->
           </div>
         </div>
       </header>
+      
       <nav id="nav"><!-- Nav -->
         <ul>
           <li id="home"><!-- Khai Yi Chin Tab -->
@@ -100,7 +102,7 @@
             </ul>
           </li>
           <li><!-- Blog Tab -->
-            <a href="blog/blog-main.html">Blog **Under Construction**</a>
+            <a href="https://khaiyichin.blogspot.com">Blog</a>
           </li>
         </ul>
       </nav>
@@ -258,52 +260,60 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    
-    <!-- Footer -->
-    <footer id="footer" class="container">
-      <div class="row 200%">
-        <div class="12u">
-        <!-- Contact -->
-          <section>
-            <h2 class="major"><span>Get in touch</span></h2>
-            <ul class="contact">
-              <li>
-                <a class="icon fa-linkedin" href="https://www.linkedin.com/pub/khai-yi-chin/95/623/78a"><span class="label">Linkedin</span></a>
-              </li>
-              <li>
-                <a class="icon fa-facebook" href="https://www.facebook.com/khaiyichin"><span class="label">Facebook</span></a>
-              </li>
-              <li>
-                <a class="icon fa-twitter" href="https://www.twitter.com/khaiyichin"><span class="label">Twitter</span></a>
-              </li>
-              <li>
-                <a class="icon fa-instagram" href="https://instagram.com/khaiyichin/"><span class="label">Instagram</span></a>
-              </li>
-            <!--<li><a class="icon fa-envelope" href="mailto:khaiyichin@gmail.com"><span class="label">Email</span></a></li>-->
-            </ul>
-          </section>
-        </div>
-      </div>
-      
-      <!-- Copyright -->
-      <div id="copyright">
-        <ul class="menu">
-          <li>
-            © Khai Yi Chin. All rights reserved
-          </li>
-          <li>
-            Design: <a href="http://html5up.net">HTML5 UP</a>
-          </li>
-          <li>
-            Last Updated: 02/18/19
-          </li>
-        </ul>
-      </div>
-    </footer>
+      </div>    
+			<footer id="footer" class="container"><!-- Footer -->
+				<div class="row 200%">
+					<div class="12u">
+						<section><!-- Contact -->
+							<h2 class="major"><span>Get in touch</span></h2>
+							<ul class="contact">
+								<li>
+									<a class="icon fa-linkedin" href="https://www.linkedin.com/pub/khai-yi-chin/95/623/78a"><span class="label">Linkedin</span></a>
+								</li>
+								<li>
+									<a class="icon fa-facebook" href="https://www.facebook.com/khaiyichin"><span class="label">Facebook</span></a>
+								</li>
+								<li>
+									<a class="icon fa-twitter" href="https://www.twitter.com/khaiyichin"><span class="label">Twitter</span></a>
+								</li>
+								<li>
+									<a class="icon fa-instagram" href="https://instagram.com/khaiyichin/"><span class="label">Instagram</span></a>
+								</li>
+								<!--<li>-->
+								<!--  <a class="icon fa-envelope" href="mailto:khaiyichin@gmail.com"><span class="label">Email</span></a>-->
+								<!--</li>-->
+							</ul>
+						</section>
+					</div>
+				</div>
+				
+				<!-- Copyright -->
+				<div id="copyright">
+					<ul class="menu">
+						<li>
+							© Khai Yi Chin. All rights reserved
+						</li>
+						<li>
+							Design: <a href="http://html5up.net">HTML5 UP</a>
+						</li>
+						<li>
+							Last Updated: <var id="date"></var>
+						</li>
+					</ul>
+				</div>
+			</footer>
+		</div>
     
     <!-- Scripts -->
+    <script>
+      n =  new Date();
+      y = n.getFullYear() - 2000;
+      m = n.getMonth() + 1;
+      d = n.getDate();
+      if (m < 10){m = "0" + m;}
+      if (d < 10){d = "0" + d;}
+      document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+    </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.dropotron.min.js"></script>
     <script src="assets/js/skel.min.js"></script>
