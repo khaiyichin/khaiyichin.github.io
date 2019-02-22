@@ -306,15 +306,6 @@
 		</div>
     
     <!-- Scripts -->
-    <script>
-      n =  new Date();
-      y = n.getFullYear() - 2000;
-      m = n.getMonth() + 1;
-      d = n.getDate();
-      if (m < 10){m = "0" + m;}
-      if (d < 10){d = "0" + d;}
-      document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
-    </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.dropotron.min.js"></script>
     <script src="assets/js/skel.min.js"></script>
@@ -322,5 +313,6 @@
     <script src="assets/js/util.js"></script>
     <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
     <script src="assets/js/main.js"></script>
+		<script>document.getElementById('date').innerHTML = update_date;</script><!--"Last Updated" date-->
   </body>
 </html>
