@@ -4,6 +4,16 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+/* Update variable 'update_date' whenever changes to website is made */
+var update_date = "02/27/19";
+//
+//window.onload = function() {
+//	//when the document is finished loading, replace everything
+//  //between the <a ...> </a> tags with the value of splitText
+//  document.getElementById("date").innerHTML=update_date;
+//}
+/******************************************/
+
 (function($) {
 
 	skel
