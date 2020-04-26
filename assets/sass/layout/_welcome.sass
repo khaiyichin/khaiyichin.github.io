@@ -1,0 +1,126 @@
+.welcome-body
+    background: url("/images/welcome-background.png")
+    background-repeat: no-repeat
+    background-size: cover
+    overflow: hidden
+    .container-fluid
+        margin-top: 7%
+        margin-bottom: 7%
+
+.welcome-wrapper .card
+    display: flex
+    margin: auto
+    padding: 1.5rem 2rem
+    background-color: rgba($color-primary-base, 0.2)
+    border-radius: 10px
+    box-shadow: 0 0 0.2rem 0.15rem rgba(0, 0, 0, 0.5)
+
+    .welcome-left
+        padding: 0 7% 0 7%
+
+        .welcome-profile-img
+            display: block
+            border-radius: 50%
+            margin: 1rem auto 1.5rem
+            padding: 0.1rem 0 0.1rem 0.1rem
+            border: 2px solid $color-secondary-base
+            max-height: 35%
+            width: auto
+            
+        .card-title
+            text-align: left
+            font-family: $font-family-sans-serif
+            text-transform: uppercase
+            font-weight: $font-weight-heavier
+            font-size: $font-size-xxlg
+            color: $font-color-dark
+            letter-spacing: 0.5px
+            line-height: 1
+            margin: .75rem 0 0
+
+        .card-body
+            padding-left: 0
+            text-align: left
+            font-family: $font-family-serif
+            text-transform: lowercase
+            font-weight: $font-weight-heavy
+            color: lighten($font-color-dark, 10%)
+
+    .welcome-right
+        margin: 0.5rem 0
+        padding: 0 2rem 0 0
+
+        ul
+            list-style-type: none
+            text-align: right
+            padding: 1rem 0rem 1rem 0
+            margin-bottom: 0
+
+            li
+                margin: auto
+                padding: 0.5rem 0.25rem
+
+                a.welcome-btn
+                    padding-top: 5px
+                    padding-bottom: 5px
+                    background-color: rgba($color-secondary-light, 0.65)
+                    border-color: $color-secondary-base
+                    border-width: medium
+                    color: $font-color-dark
+                    text-transform: uppercase
+                    font-family: $font-family-sans-serif
+                    font-size: $font-size-lg
+                    font-weight: $font-weight-heavy
+                    min-width: 100%
+                    border-radius: 10px
+                    transition: all ease-in-out 0.25s
+
+                    &:hover
+                        background-color: lighten($color-primary-base, 15%)
+                        border-color: $color-primary-base
+                        box-shadow: 0 0.15rem 0.1rem 0 $color-primary-base
+                        color: lighten($font-color-lighter, 5%)
+                        transform: translateY(-4px)
+                        transition: all ease-in-out 0.25s
+
+                    &:focus
+                        transform: translateY(-4px)
+                        box-shadow: inset 0 0 0.2rem 0.1rem $color-primary-base
+
+        hr
+            background-color: $color-secondary-base
+            border: 0.07rem inset $color-secondary-light
+
+        ul.welcome-links
+            display: flex
+            justify-content: space-around
+
+            li
+                margin: 0
+                padding: 0
+
+                a
+                    font-size: 2.7rem
+                    text-decoration: none
+                    color: $color-secondary-base
+                    transition: all ease-in-out 0.25s
+
+            a.fa-linkedin:hover
+                color: #0e76a8
+                transform: translateY(-4px)
+
+            li a.fa-facebook:hover
+                color: #3b5998
+                transform: translateY(-4px)
+
+            li a.fa-twitter:hover
+                color: #00acee
+                transform: translateY(-4px)
+
+            li a.fa-instagram:hover
+                color: transparent
+                background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)
+                background: -webkit-radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)
+                background-clip: text
+                -webkit-background-clip: text
+                transform: translateY(-4px)
