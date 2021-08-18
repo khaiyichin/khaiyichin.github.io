@@ -1411,6 +1411,7 @@
 		}
 
 	ul.contact {
+		margin-top: -1.0em;
 		cursor: default;
 	}
 
@@ -1463,7 +1464,7 @@
 				}
 
 				ul.contact li:hover a.fa-linkedin {
-					background-color: #006599;
+					background-color: #0A66C2;
 				}
 
 				ul.contact li:hover a.fa-instagram {
@@ -1472,6 +1473,10 @@
 
 				ul.contact li:hover a.fa-google-plus {
 					background-color: #DA2713;
+				}
+
+				ul.contact li:hover a.fa-github {
+					background-color: #495057;
 				}
 
 			ul.contact li:active {
@@ -1827,8 +1832,8 @@
 				}
 
 					h2.major span {
-						top: -0.75em;
-						padding: 0 1.5em 0.5em 1.5em;
+						top: -0.5em;
+						padding: 0 1.0em 0.0em 1.0em;
 					}
 
 			h3, h4 {
