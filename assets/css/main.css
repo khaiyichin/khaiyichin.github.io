@@ -47,6 +47,18 @@
 		height: 275px;
 		width: 275px;
 	}
+
+	span.image.center.large {
+		margin: 0.5em 0 0.5em 0;
+		height: 480px;
+		width: 100%;
+	}
+
+	span.image.center.large > img {
+		height: 100%;
+		width: auto;
+		margin: 0 auto 0 auto;
+	}	
 	
 	.image.right.square.mini {
 		float: right;
