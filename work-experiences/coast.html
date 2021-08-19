@@ -1,0 +1,260 @@
+<!DOCTYPE HTML>
+<!--
+	TXT by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Khai Yi Chin | My Portfolio</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="shortcut icon" href="../images/K Favicon.ico" type="image/x-icon" />
+	<!--[if lte IE 8]><script src="../assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="../assets/css/main.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="../assets/css/ie8.css" /><![endif]-->
+</head>
+
+<body>
+	<div id="page-wrapper">
+		<header id="header">
+			<!-- Header -->
+			<div class="logo container">
+				<div>
+					<h1><a id="logo">Work & Leadership Experiences</a></h1>
+				</div>
+			</div>
+		</header>
+
+		<nav id="nav">
+			<!-- Nav -->
+			<ul>
+				<li id="home">
+					<!-- Khai Yi Chin Tab -->
+					<a href="../index.html">Khai Yi Chin</a>
+				</li>
+				<li>
+					<!-- My Profile Tab -->
+					<a id="my-profile" href="../index.html#background">My Profile</a>
+					<ul>
+						<li>
+							<a href="../index.html#background">Background</a>
+						</li>
+						<li class="nav-expand">
+							<a>Education</a>
+							<ul>
+								<li>
+									<a href="../index.html#ut">University of Texas at Austin (2016 - 2018)</a>
+								</li>
+								<li>
+									<a href="../index.html#uofm">University of Michigan (2013 - 2016)</a>
+								</li>
+								<li>
+									<a href="../index.html#sunway">Sunway University (2011 - 2013)</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li class="current">
+					<!-- Work Experiences Tab -->
+					<a id="work-experiences" href="work-experiences.html"> Work &amp; Leadership Experiences</a>
+					<ul>
+						<li>
+							<a href="coast.html">COAST Autonomous</a>
+						</li>
+						<li>
+							<a href="siera.html">SIERA.AI</a>
+						</li>
+						<li>
+							<a href="dunan.html">DunAn Precision, Inc. - R&D Division</a>
+						</li>
+						<li>
+							<a>University of Texas at Austin, TX, USA</a>
+							<ul>
+								<li>
+									<a href="ut-gra.html">Dept. of Mechanical Engineering</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a>University of Michigan, MI, USA</a>
+							<ul>
+								<li>
+									<a href="ramlab.html">RAMlab</a>
+								</li>
+								<li>
+									<a href="pierpont.html">Pierpont Commons</a>
+								</li>
+								<li>
+									<a href="midwest.html">Malaysia Midwest Games Committee</a>
+								</li>
+								<li>
+									<a href="sct.html">Solar Car Team</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a>Sunway University, Selangor, Malaysia</a>
+							<ul>
+								<li>
+									<a href="adtp.html">American Degree Transfer Program Student Committee</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="projects-resume.html">Projects &amp; Résumé</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<!-- Interests Tab -->
+					<a href="../interests/interests.html">Interests</a>
+					<ul>
+						<li>
+							<a href="../interests/interests.html">Hobbies &amp; Projects</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<!-- Blog Tab -->
+					<a href="https://khaiyichin.blogspot.com">Blog</a>
+				</li>
+			</ul>
+		</nav>
+
+		<div id="main-wrapper">
+			<!-- Main -->
+			<div id="main" class="container">
+				<div class="row">
+					<div class="12u">
+						<div class="content">
+							<article class="box page-content">
+								<header>
+									<h1>COAST Autonomous</h1>
+									<p>Robotics Engineer</p>
+								</header>
+								<section class="introduction">
+									<!-- Intro -->
+									<span class="image left square" title="Bigfoot, an autonomous long bed vehicle"><img
+											src="images/coast1.jpg"
+											alt="Bigfoot, an autonomous long bed vehicle" /></span>
+									<p>I joined COAST Autonomous as a Robotics Engineer in November 2020 to improve the
+										localization capabilities of the company's autonomous vehicles. Specifically,
+										the localization algorithm that I designed would complement the existing setup
+										to enhance robustness during outdoor navigation. I was only able to spend
+										around 8 months with COAST as I committed to a PhD program prior to joining
+										the company.</p>
+								</section>
+								<section class="work-experience section">
+									<!-- Background -->
+									<h3 class="individual">Background</h3>
+									<p>COAST Autonomous aims to provide mobility solutions that ultimately change the
+										pedestrian-vehicle relationship in urban areas; the company envisions the future
+										of cities as being more walkable &mdash; traversed by citizens without
+										obstructive infrastructure catered for fast-moving vehicles &mdash; which led to
+										the creation of the P-1 shuttle. Additionally, COAST provide autonomous vehicle
+										solutions for cost-effective on-demand mobility measures, such as the AV Bigfoot
+										and the AV golf cart, used to transport goods and passengers respectively.</p>
+								</section>
+								<section class="work-experience section">
+									<!-- My Work and Experience -->
+									<h3 class="individual">My Work and Experience</h3>
+									<span class="image center large" title="3-D localization demo in ROS2"><img
+											src="images/coast2.gif" alt="3-D localization demo in ROS2" /></span>
+									<p>At COAST, I spearheaded the development of a localization algorithm for the
+										company's autonomous vehicles to improve navigation robustness. The algorithm
+										that I devised was based on a 3-D particle filter that utilizes an octree-based
+										likelihood field. For that, I created a multi-platform C++ library as well as
+										wrapper application code for both <a
+											href="https://docs.ros.org/en/foxy/index.html">ROS2 Foxy</a> (Linux) and <a
+											href="https://intempora.com/products/rtmaps/">RTMaps</a> (Windows). The
+										algorithm &mdash; which processes robot motion, LiDAR measurement, and
+										optionally, GPS measurement &mdash; provides real-time localization of ±1 m
+										precision along a >1,800 ft. outdoor trajectory in a >2 million sq. ft. map with
+										abundant dynamic obstacles (trees, pedestrians, vehicles, etc.). In addition, I
+										led efforts in establishing and managing the company's Robotics team's
+										documentation and knowledge base.
+									</p>
+								</section>
+								<section>
+									<!-- External Links and Materials -->
+									<h3 class="individual">External Links and Materials</h3>
+									<h4 class="initial h4">Links</h4>
+									<li>
+										<a href="https://www.coastautonomous.com/">COAST Autonomous</a>
+									</li>
+									<li>
+										<a href="https://www.linkedin.com/company/coast-autonomous/">COAST Autonomous LinkedIn Page</a>
+									</li>
+								</section>
+							</article>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer" class="container">
+			<!-- Footer -->
+			<div class="row 200%">
+				<div class="12u">
+					<section>
+						<!-- Contact -->
+						<h2 class="major"><span>Find me at</span></h2>
+						<ul class="contact">
+							<li>
+								<a class="icon fa-github" href="https://www.github.com/khaiyichin/">
+									<span class="label">GitHub</span>
+								</a>
+							</li>
+							<li>
+								<a class="icon fa-linkedin" href="https://www.linkedin.com/pub/khai-yi-chin/95/623/78a">
+									<span class="label">Linkedin</span>
+								</a>
+							</li>
+							<li>
+								<a class="icon fa-instagram" href="https://instagram.com/khaiyichin/">
+									<span class="label">Instagram</span>
+								</a>
+							</li>
+							<!--<li>-->
+							<!--  <a class="icon fa-envelope" href="mailto:khaiyichin@gmail.com"><span class="label">Email</span></a>-->
+							<!--</li>-->
+						</ul>
+					</section>
+				</div>
+			</div>
+
+			<!-- Copyright -->
+			<div id="copyright">
+				<ul class="menu">
+					<li>
+						© Khai Yi Chin. All rights reserved
+					</li>
+					<li>
+						Design: <a href="http://html5up.net">HTML5 UP</a>
+					</li>
+					<li>
+						Last Updated: <var id="date"></var>
+					</li>
+				</ul>
+			</div>
+		</footer>
+	</div>
+
+	<!-- Scripts -->
+	<script src="../assets/js/jquery.min.js"></script>
+	<script src="../assets/js/jquery.dropotron.min.js"></script>
+	<script src="../assets/js/skel.min.js"></script>
+	<script src="../assets/js/skel-viewport.min.js"></script>
+	<script src="../assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="../assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="../assets/js/main.js"></script>
+	<script>document.getElementById('date').innerHTML = update_date;</script>
+	<!--"Last Updated" date-->
+</body>
+
+</html>
