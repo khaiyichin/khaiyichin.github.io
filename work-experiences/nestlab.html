@@ -152,8 +152,10 @@
 										under my advisor, Dr. Carlo Pinciroli. For my dissertation research, I designed
 										algorithms to enable swarm robots to monitor the environment effectively despite
 										having severe sensor faults. I spent four years at the lab, culminating in a
-										dissertation titled "Sensing Through Faults: Collective Perception by Imperfect
-										Robot Swarms."</p>
+										dissertation titled <a
+											href="https://digital.wpi.edu/concern/etds/5x21tk73j?locale=en">
+											"Sensing Through Faults: Collective Perception by Imperfect
+											Robot Swarms."</a></p>
 								</section>
 								<section class="work-experience section">
 									<!-- Background -->
@@ -202,14 +204,16 @@
 										detect the rate at which the black tiles occur in the environment, called the
 										<i>Minimalistic Collective Perception Algorithm</i>. This algorithm enables
 										swarm robots with severely degraded sensors to solve the state estimation
-										problem, assuming that the level of degradation is known.</p>
+										problem, assuming that the level of degradation is known.
+									</p>
 									<p>When sensor accuracy is unknown, I devised the <i>Adaptive Sensor Calibration
 											Filter (ASCF)</i> to help robots calibrate for miscalibrated robots and the
 										<i>Bayes Collective Perception Filter (BayesCPF)</i> to help robots track their
 										sensor degradation over time. These algorithms involve various statistical
 										techniques, including an extended Kalman filter and a hypothesis test. These
 										methods, introduced in my second and third papers, show that accurate estimation
-										is possible even when robots are miscalibrated and have a degrading sensor.</p>
+										is possible even when robots are miscalibrated or have a degrading sensor.
+									</p>
 									<p>Throughout my four years at the lab, my research efforts have required building
 										physical platforms, programming robot controllers, and developing workflows for
 										experiments (simulated and physical). To run the experiments, the robots needed
@@ -308,7 +312,7 @@
 			<div id="copyright">
 				<ul class="menu">
 					<li>
-						© Khai Yi Chin. All rights reserved
+						© <var id="year"></var> Khai Yi Chin. All rights reserved
 					</li>
 					<li>
 						Design: <a href="http://html5up.net">HTML5 UP</a>
@@ -330,6 +334,7 @@
 	<!--[if lte IE 8]><script src="../assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="../assets/js/main.js"></script>
 	<script>document.getElementById('date').innerHTML = update_date;</script>
+	<script>document.getElementById('year').innerHTML = new Date().getFullYear();</script>
 	<!--"Last Updated" date-->
 </body>
 

@@ -206,6 +206,77 @@
 					</div>
 				</div>
 
+				<!-- WPI frame -->
+				<div class="row 200%">
+					<div id="ut" class="12u">
+						<section class="box features">
+							<!-- WPI -->
+							<h2 class="major"><span>Worcester Polytechnic Institute</span></h2>
+							<div class="row">
+								<div class="3u 12u(mobile)">
+									<section class="box feature">
+										<!-- Major -->
+										<a class="image featured" title="WPI Wind Sensor Fountain"><img
+												src="main/images/wpi-major.jpg" alt="WPI Wind Sensor Fountain"></a>
+										<h3><a>Major</a></h3>
+										<p>After a few years working in the robotics industry, I went back to school for
+											my PhD at Worcester Polytechnic Institute in Fall 2021, spurred by my
+											curiosity in robotics research. For my dissertation, I designed algorithms
+											to enable faulty swarm robots monitor the enviornment using statistical and
+											optimization techniques. I graduated in Spring 2025 with a PhD in Robotics
+											Engineering.</p>
+									</section>
+								</div>
+								<div class="3u 12u(mobile)">
+									<section class="box feature">
+										<!-- Courses -->
+										<a class="image featured"
+											title="Atari Breakout game used in my reinforcement learning course"><img
+												src="main/images/wpi-courses.jpg"
+												alt="Atari Breakout game used in my reinforcement learning course"></a>
+										<h3><a>Courses</a></h3>
+										<p>I took a few memorable courses during my four years at WPI. The first was on
+											probability and mathematical statistics, spread over two semesters. It
+											kindled my interest in statistics, which has been an uncomfortable subject
+											for a while now. Across the two courses, I gained a deeper understanding and
+											respect for the techniques that are so ubiquitous today, yet often disguised
+											by the catch-all term <i>artificial intelligence</i>. This is amplified by
+											my fascination for estimation methods critical to modern robotic
+											applications.</p>
+										<p>The other was a course on reinforcement learning, where the projects consist
+											of building and training models to accomplish objectives. One such objective
+											was to play the classic Atari game, Breakout. In that course, I learned many
+											rudimentary reinforcement learning methods, though mostly value-based over
+											policy-based models.</p>
+									</section>
+								</div>
+								<div class="3u 12u(mobile)">
+									<section class="box feature">
+										<!-- Activities -->
+										<a class="image featured" title="NEST Lab group photo during summer 2024"><img
+												src="main/images/wpi-activities.jpg"
+												alt="NEST Lab group photo during summer 2024"></a>
+										<h3><a>Activities</a></h3>
+										<p>For the most part, I was a Graduate Research Assistant at the <a
+												href="https://nestlab.net">NEST Lab</a>, advised by <a
+												href="https://carlo.pinciroli.net">Dr. Carlo Pinciroli</a>. At the lab,
+											I worked on my research as well as adjacent projects, like developing <a
+												href="https://argos-sim.info">ARGoS</a> plugins for the <a
+												href="https://github.com/nestlab/argos3-kheperaiv">Khepera
+												IV</a> and <a href="https://github.com/nestlab/argos3-deepracer">AWS
+												DeepRacer</a> robots. I also attended two conferences: IROS 2023 and MRS
+											2023.</p>
+										<p>Additionally, I spent the first year as a Teaching Assistant for
+											undergraduate junior/senior level robotics courses. This involved holding
+											review sessions, creating solutions, and grading on assignments that
+											involved robot control, kinematics, path planning, and state estimation.</p>
+									</section>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+
 				<!-- UT Austin frame -->
 				<div class="row 200%">
 					<div id="ut" class="12u">
@@ -242,7 +313,7 @@
 										<h3><a>Courses</a></h3>
 										<p>I encountered quantum mechanics for the first time when I took a course on
 											mathematical modeling. It was one of the most intriguing subjects that I've
-											encountered, and piqued my interest so much that I did my master's thesis in
+											experienced, and piqued my interest so much that I did my master's thesis in
 											computational models of doped carbon nanotubes.</p>
 										<p>The course I valued the most in my master's degree is the one that I
 											studied about optimal controllers. I've always had a great deal of interest
@@ -465,7 +536,7 @@
 			<div id="copyright">
 				<ul class="menu">
 					<li>
-						© Khai Yi Chin. All rights reserved
+						© <var id="year"></var> Khai Yi Chin. All rights reserved
 					</li>
 					<li>
 						Design: <a href="http://html5up.net">HTML5 UP</a>
@@ -487,6 +558,7 @@
 	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="assets/js/main.js"></script>
 	<script>document.getElementById('date').innerHTML = update_date;</script>
+	<script>document.getElementById('year').innerHTML = new Date().getFullYear();</script>
 	<!--"Last Updated" date-->
 </body>
 

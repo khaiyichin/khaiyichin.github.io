@@ -232,8 +232,10 @@
 										under my advisor, Dr. Carlo Pinciroli. For my dissertation research, I designed
 										algorithms to enable swarm robots to monitor the environment effectively despite
 										having severe sensor faults. I spent four years at the lab, culminating in a
-										dissertation titled "Sensing Through Faults: Collective Perception by Imperfect
-										Robot Swarms." <a href="nestlab.html">Read more</a></p>
+										dissertation titled <a
+											href="https://digital.wpi.edu/concern/etds/5x21tk73j?locale=en">
+											"Sensing Through Faults: Collective Perception by Imperfect
+											Robot Swarms."</a> <a href="nestlab.html">Read more</a></p>
 								</section>
 							</article>
 							<article class="box page-content">
@@ -446,7 +448,7 @@
 			<div id="copyright">
 				<ul class="menu">
 					<li>
-						© Khai Yi Chin. All rights reserved
+						© <var id="year"></var> Khai Yi Chin. All rights reserved
 					</li>
 					<li>
 						Design: <a href="http://html5up.net">HTML5 UP</a>
@@ -468,6 +470,7 @@
 	<!--[if lte IE 8]><script src="../assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="../assets/js/main.js"></script>
 	<script>document.getElementById('date').innerHTML = update_date;</script>
+	<script>document.getElementById('year').innerHTML = new Date().getFullYear();</script>
 	<!--"Last Updated" date-->
 </body>
 

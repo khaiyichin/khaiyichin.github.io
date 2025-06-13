@@ -143,13 +143,31 @@
 									<!-- Projects-->
 									<h1>Projects</h1>
 								</header>
-								<section>
+								<section class="projects-resume">
+									<h4 class="initial h4">Ongoing - Teaching and Learning Notes</h4>
+									<span class="image right square"
+										style="width:200px;height:200px;margin-bottom:10px;"><img
+											src="images/projects-factor_graph.png"> </span>
+									<a href="https://github.com/khaiyichin/teach_learn_notes" target="_blank"
+										aria-label="GitHub"
+										style="display: inline-flex; align-items: center; text-decoration: none; color: black; font-family: 'Ubuntu', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 600; padding: .5em 0 .5em 0">
+										<img src="https://github.com/fluidicon.png" alt="GitHub" width="30" height="30"
+											style="margin-right: 8px;">
+										Teaching and Learning Notes
+									</a>
+									<p>
+										A collection of my notes (as Jupyter notebooks) of interesting materials that I
+										learned or had to teach.
+									</p>
+
+								</section>
+								<section class="projects-resume">
 									<h4 class="initial h4">2024 - SVGDCpp</h4>
 									<span class="image right square"
 										style="width:200px;height:200px;margin-bottom:10px;"><img
 											src="images/projects-svgd_example_360p.gif"> </span>
 									<a href="https://github.com/khaiyichin/SVGDCpp" target="_blank" aria-label="GitHub"
-										style="display: inline-flex; align-items: center; text-decoration: none; color: black; font-family: 'Ubuntu', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 600;">
+										style="display: inline-flex; align-items: center; text-decoration: none; color: black; font-family: 'Ubuntu', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 600; padding: .5em 0 .5em 0">
 										<img src="https://github.com/fluidicon.png" alt="GitHub" width="30" height="30"
 											style="margin-right: 8px;">
 										SVGDCpp: Stein Variational Gradient Descent in C++
@@ -164,7 +182,7 @@
 										this library.
 									</p>
 								</section>
-								<section>
+								<section class="projects-resume">
 									<h4 class="initial h4">2015 - Online Portfolio</h4>
 									<p>As an engineering student, coding is quite an essential skill to have. I came
 										across learning HTML when I joined the Malaysia Midwest Games 2015 Committee's
@@ -236,7 +254,7 @@
 			<div id="copyright">
 				<ul class="menu">
 					<li>
-						© Khai Yi Chin. All rights reserved
+						© <var id="year"></var> Khai Yi Chin. All rights reserved
 					</li>
 					<li>
 						Design: <a href="http://html5up.net">HTML5 UP</a>
@@ -258,6 +276,7 @@
 	<!--[if lte IE 8]><script src="../assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="../assets/js/main.js"></script>
 	<script>document.getElementById('date').innerHTML = update_date;</script>
+	<script>document.getElementById('year').innerHTML = new Date().getFullYear();</script>
 	<!--"Last Updated" date-->
 </body>
 

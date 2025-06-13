@@ -292,7 +292,7 @@
 			<div id="copyright">
 				<ul class="menu">
 					<li>
-						© Khai Yi Chin. All rights reserved
+						© <var id="year"></var> Khai Yi Chin. All rights reserved
 					</li>
 					<li>
 						Design: <a href="http://html5up.net">HTML5 UP</a>
@@ -314,6 +314,7 @@
 	<!--[if lte IE 8]><script src="../assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="../assets/js/main.js"></script>
 	<script>document.getElementById('date').innerHTML = update_date;</script>
+	<script>document.getElementById('year').innerHTML = new Date().getFullYear();</script>
 	<!--"Last Updated" date-->
 </body>
 
