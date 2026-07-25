@@ -5,7 +5,7 @@
 */
 
 /* Update variable 'update_date' whenever changes to website is made */
-var update_date = "June 2025";
+var update_date = "July 2026";
 //
 //window.onload = function() {
 //	//when the document is finished loading, replace everything
