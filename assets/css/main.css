@@ -78,27 +78,32 @@
 	}
 
 	/* One project on the Projects page: body text left, thumbnail floated right.
-	   Was an inline min-height on each section. */
+	   The min-height reserves room for that floated thumbnail on wide screens, where
+	   the section does not contain it. Below 1200px the section is a flow-root and
+	   sizes itself, so this has no effect there. Was an inline style on each section. */
 	.project-entry {
 		min-height: 10em;
 	}
 
-	/* On wide screens a row of four 275px images plus three 25px gaps comes to
-	   1175px in a 1200px column, leaving all 25px of slack on the right. Half of it
-	   on the left centres the row. Narrower screens size these by percentage
-	   instead - see the 737-1200px block. */
+	/* A row of four images carries its gap as a margin on one side only, which puts
+	   all the leftover space at one end. Splitting the same gap symmetrically across
+	   both sides leaves the row centred by construction, with no leftover to measure
+	   and divide up. The gap between neighbours is unchanged: half from each.
+	   Narrower screens size these by percentage - see the 737-1200px block. */
 	@media screen and (min-width: 1201px) {
 
-		/* The four margin boxes already total exactly 1200px, so the trailing margin
-		   has to go first — otherwise the indent below pushes the fourth image onto
-		   a second row. */
-		.work-experience .image.left.square:first-of-type:nth-last-of-type(4) ~ .image.left.square:last-of-type {
-			margin-right: 0;
+		.work-experience .image.left.square:first-of-type:nth-last-of-type(4),
+		.work-experience .image.left.square:first-of-type:nth-last-of-type(4) ~ .image.left.square {
+			margin-left: 12.5px;
+			margin-right: 12.5px;
 		}
 
-		.work-experience .image.left.square:first-of-type:nth-last-of-type(4) {
-			margin-left: 12.5px;
-		}
+			/* Text still flows beside the row at this width (there is no clear: left
+			   here), and the trailing margin would narrow that space just enough to
+			   push the paragraph's first word onto the next line. */
+			.work-experience .image.left.square:first-of-type:nth-last-of-type(4) ~ .image.left.square:last-of-type {
+				margin-right: 0;
+			}
 
 	}
 
@@ -2330,9 +2335,15 @@
 				}
 
 				/* Was padding: 0.6em 1em 0 1em — top padding but no bottom, which pushed
-				   the text 9px below the centre of the rule it sits on. Desktop uses
-				   symmetric vertical padding and lands the text exactly on the line;
-				   -0.44em is the shift that reproduces that here. */
+				   the text 9px below the centre of the rule it sits on.
+
+				   The offset differs from the -0.5em used above 1200px because it has to
+				   centre glyphs, not boxes, and the font's ascent/descent do not scale
+				   with the heading size. translateY(-50%) is the obvious font-independent
+				   alternative but measures worse (2.0px off centre, against 0.2px here),
+				   because it centres the line box rather than the text within it. A
+				   properly derived version needs the rule drawn as a flex pseudo-element
+				   instead of a background the span masks. */
 				h2.major span {
 					top: -0.44em;
 					padding: 0 1em 0 1em;
@@ -2375,7 +2386,13 @@
 			/* Same containment problem: the fixed height was shorter than the image,
 			   so the intro image overhung and left only ~18px before the first
 			   section heading. Auto height plus a real bottom margin puts that gap
-			   in line with the spacing between the later sections. */
+			   in line with the spacing between the later sections.
+
+			   The margin is smaller than the 5.5em `section, article` default because
+			   this box ends at the floated image rather than at text, so the -25px on
+			   its last child never reaches the bottom edge to trim it the way it does
+			   for the sections below. Deriving it as calc(5.5em - 25px) overshoots by
+			   ~9px; this is tuned to the gap the later sections actually show. */
 			section.introduction {
 				height: auto;
 				margin-bottom: 3em;
@@ -2388,26 +2405,16 @@
 
 			/* Four thumbnails in a row need ~1175px at the standard 275px, more than
 			   the column has here, so they wrapped into a clumped 2x2. Sizing them by
-			   percentage keeps all four on one row at any width in this range. The
-			   quantity selector applies this only to runs of exactly four. */
+			   percentage keeps all four on one row at any width in this range, and
+			   splitting the gap symmetrically across both sides centres the row by
+			   construction rather than by measuring the leftover. The quantity
+			   selector applies this only to runs of exactly four. */
 			.work-experience .image.left.square:first-of-type:nth-last-of-type(4),
 			.work-experience .image.left.square:first-of-type:nth-last-of-type(4) ~ .image.left.square {
 				width: 23%;
 				height: auto;
-				margin: 0.5em 2% 0.5em 0;
+				margin: 0.5em 1%;
 			}
-
-				/* Dropping the trailing margin lets the four fill 98% of the column
-				   rather than 93%; at 24% they no longer fit and wrap back to 3+1. */
-				.work-experience .image.left.square:first-of-type:nth-last-of-type(4) ~ .image.left.square:last-of-type {
-					margin-right: 0;
-				}
-
-				/* Half the remaining slack on the left, so the row is centred instead
-				   of sitting hard against the left edge. */
-				.work-experience .image.left.square:first-of-type:nth-last-of-type(4) {
-					margin-left: 1%;
-				}
 
 				/* The four together leave a sliver too narrow to hold words, which
 				   stranded a two-word line beside them. Start the text below instead. */
@@ -2514,6 +2521,13 @@
 
 	@media screen and (max-width: 736px) {
 
+		/* The off-canvas title bar is fixed, so it sits over the top of the page.
+		   Anything that needs to clear it refers to this rather than repeating the
+		   number. */
+		:root {
+			--titlebar-height: 44px;
+		}
+
 		/* Basic */
 
 			html, body {
@@ -2531,8 +2545,32 @@
 				margin: 0 0 0.5em 0;
 			}
 
+			/* The blanket rule above zeroes the top margin, which left these section
+			   headings sitting against the text of the section before them. */
+			.individual {
+				margin-top: 1.5em;
+			}
+
+			.initial.h4 {
+				margin-top: 2.5em;
+			}
+
+				/* ...except directly after any heading, where the two belong together
+				   and the separation would push them apart. */
+				h1 + .initial.h4,
+				h2 + .initial.h4,
+				h3 + .initial.h4,
+				h4 + .initial.h4,
+				h5 + .initial.h4 {
+					margin-top: 0.5em;
+				}
+
+			/* Without a size of its own a section heading took the blanket 1.5em above,
+			   matching the banner heading exactly and reading as top-heavy against it.
+			   Both wider breakpoints size section headings at 0.84x the banner. */
 			h2.major {
 				text-align: left;
+				font-size: 1.9em;
 				margin: 0.775em 0 0.75em 0;
 			}
 
@@ -2637,6 +2675,13 @@
 					font-size: 1.25em;
 				}
 
+					/* The blanket 1.5em above would otherwise make the role larger than
+					   the employer it belongs to. Both wider breakpoints keep the role
+					   at body size. */
+					.box.post-summary h5 {
+						font-size: 1em;
+					}
+
 			.box.post h3 {
 				font-size: 2.25em;
 				line-height: 1.25em;
@@ -2661,6 +2706,25 @@
 				margin: 0 0 0.5em 0;
 			}
 
+			/* The page title had no size or line-height of its own here, so it fell
+			   back to body size — smaller than the section headings beneath it — and
+			   inherited a line-height barely half its font size, which made a wrapped
+			   title collide with itself and with the subtitle. */
+			.box.page-content header h1 {
+				font-size: 2.75em;
+				line-height: 1.1em;
+			}
+
+			/* Title, location and role form one unit; the blanket 0.5em bottom margin
+			   resolves to 15px and 10px at these font sizes and spreads them apart. */
+			.box.page-content header h2 {
+				margin-bottom: 0.15em;
+			}
+
+			.box.page-content header h4 {
+				margin-bottom: 0.2em;
+			}
+
 			.box.page-content header > p {
 				margin: 0 0 0.75em 0;
 			}
@@ -2669,30 +2733,35 @@
 				margin: 0 0 0.5em 0;
 			}
 
+			/* Space above rather than below, so each title groups with the entry it
+			   introduces instead of the one above it.
+
+			   The top value is written as the gap actually wanted plus the 25px that
+			   `article > :last-child { margin-bottom: -25px }` further up swallows when
+			   this margin collapses against the previous entry. Written as a plain 5em
+			   the number claims a separation nearly twice what it produces. */
 			.box.page-content header {
-				margin: 0 0 3em 0;
+				margin: calc(3.125em + 25px) 0 1em 0;
 			}
+
+				/* On the page's first entry that leading space is just a gap below the
+				   title bar. :first-of-type is essential — <header> is the first child
+				   of every entry's <article>, so :first-child alone would strip the
+				   margin from all of them. */
+				.box.page-content:first-of-type > header:first-child {
+					margin-top: 0;
+				}
 
 		/* Sidebar + Content */
 
+			/* In a single column this list lands after every entry it links to, so it
+			   only repeats what the reader has already scrolled past. */
 			.sidebar {
-				border-top: solid 2px #e7eae8;
-				padding-top: 5em;
-				margin-top: 5em;
-				border-bottom: solid 2px #e7eae8;
-				padding-bottom: 5em;
+				display: none;
 			}
 
-				.sidebar > section {
-					margin: 0 0 5em 0 !important;
-				}
-
-					.sidebar > section:last-child {
-						margin: 0 !important;
-					}
-
 			.content {
-				padding-top: 3em;
+				padding-top: 0.2em;
 			}
 
 				.homepage .content {
@@ -2715,6 +2784,16 @@
 
 				.homepage #main-wrapper {
 					border-top-width: 15px;
+				}
+
+				/* #page-wrapper has no padding of its own, so without this the first
+				   heading would sit underneath the fixed title bar. The padding goes
+				   here rather than on #page-wrapper so that this wrapper's white
+				   background still starts at the top of the page — the bar is only 80%
+				   opaque and the body behind it is grey. The homepage is excluded
+				   because its banner is meant to run under the bar. */
+				body:not(.homepage) #main-wrapper {
+					padding-top: var(--titlebar-height);
 				}
 
 		/* Header */
@@ -2756,15 +2835,65 @@
 					padding: 2em 0 2em 0;
 				}
 
+					/* Between rows this is section spacing, but above the first row it
+					   just adds to the gap under the title bar. */
+					#main > .row:first-child {
+						padding-top: 0;
+					}
+
+			/* Media carry width/height attributes or fixed sizes from the rules near
+			   the top of this file, both of which exceed a phone's column. */
+			#main img,
+			#main video,
+			#main iframe {
+				max-width: 100%;
+			}
+
+				#main iframe {
+					aspect-ratio: 16 / 9;
+					height: auto;
+				}
+
+			/* The fixed pixel sizes in the personal-edits block near the top of this
+			   file assume a desktop-width column. The phone column is only ~335px, so
+			   a 275px float leaves too little beside it for text, and the intro's
+			   fixed height is shorter than the image it contains. */
+			section.introduction {
+				height: auto;
+			}
+
+			.image.left.square,
+			.image.right.square,
+			.image.left.square.mini,
+			.image.right.square.mini,
+			.image.square.project {
+				float: none;
+				display: block;
+				width: 100%;
+				height: auto;
+				margin: 1em 0 1em 0;
+			}
+
+			.videos {
+				width: 100%;
+				height: auto;
+			}
+
 		/* Footer */
 
 			#footer {
-				padding: 4em 20px 2em 20px;
+				padding: 2em 20px 2em 20px;
 			}
 
 				#footer > .row {
-					padding: 1em 0 1em 0;
+					padding: 0 0 1em 0;
 				}
+
+					/* The heading's span is shifted up over the rule it sits on; the
+					   padding above already provides the separation. */
+					#footer h2.major {
+						margin-top: 0;
+					}
 
 		/* Copyright */
 
@@ -2801,7 +2930,7 @@
 				-ms-transition: -ms-transform 0.5s ease;
 				transition: transform 0.5s ease;
 				display: block;
-				height: 44px;
+				height: var(--titlebar-height);
 				left: 0;
 				position: fixed;
 				top: 0;
@@ -2818,7 +2947,7 @@
 					font-weight: 700;
 					text-transform: uppercase;
 					font-size: 1.25em;
-					line-height: 44px;
+					line-height: var(--titlebar-height);
 					color: #fff;
 					z-index: 1000;
 					text-align: center;
@@ -2919,29 +3048,27 @@
 						border-top: 0;
 					}
 
-				#navPanel .indent-1 {
-					display: inline-block;
-					width: 1em;
+				/* Indentation is applied as padding on .link.depth-N below, so that it
+				   applies to every line of an entry rather than only the first. The
+				   .indent-N spacer spans this used to style are no longer emitted. */
+				#navPanel .link.depth-1 {
+					padding-left: 2em;
 				}
 
-				#navPanel .indent-2 {
-					display: inline-block;
-					width: 2em;
+				#navPanel .link.depth-2 {
+					padding-left: 3em;
 				}
 
-				#navPanel .indent-3 {
-					display: inline-block;
-					width: 3em;
+				#navPanel .link.depth-3 {
+					padding-left: 4em;
 				}
 
-				#navPanel .indent-4 {
-					display: inline-block;
-					width: 4em;
+				#navPanel .link.depth-4 {
+					padding-left: 5em;
 				}
 
-				#navPanel .indent-5 {
-					display: inline-block;
-					width: 5em;
+				#navPanel .link.depth-5 {
+					padding-left: 6em;
 				}
 
 				#navPanel .depth-0 {
@@ -2968,189 +3095,5 @@
 				-ms-transform: translateX(0);
 				transform: translateX(0);
 			}
-
-	}
-
-/*Personal edits - phone overrides*/
-/* Kept at the end of the file deliberately: several of these override rules the
-   template also sets inside its own max-width:736px block, and they match on
-   specificity, so the later declaration has to be this one.
-
-   The fixed pixel sizes near the top of this file assume a desktop-width column.
-   On phones the content column is only ~335px wide, so they must be relaxed: the
-   225px intro height overflows and collides with the following heading, and the
-   275px squares leave too little room for text to flow beside them. */
-
-	@media screen and (max-width: 736px) {
-
-		section.introduction {
-			height: auto;
-		}
-
-		/* Entry headings sat 8px below the previous entry but 40px above their own
-		   content, so each title read as belonging to the entry above it. Move the
-		   space to the top so a heading groups with what it introduces. 5em rather
-		   than 3em because ~25px of it is absorbed by margin collapsing against the
-		   previous entry; the visible gap works out at margin minus 25px. */
-		.box.page-content header {
-			margin: 5em 0 1em 0;
-		}
-
-			/* ...but on the first entry that 5em is just dead space below the title
-			   bar, which is most of why these pages opened with a 162px gap.
-			   :first-of-type is essential — <header> is the first child of EVERY
-			   entry's <article>, so matching on :first-child alone stripped the
-			   margin from all of them and re-clumped every title with the entry
-			   above it. */
-			.box.page-content:first-of-type > header:first-child {
-				margin-top: 0;
-			}
-
-		/* The other contributor to that gap: this row padding has no desktop
-		   equivalent. The content padding stays, trimmed — the title bar is fixed
-		   and #page-wrapper has no padding to sit clear of it, so this padding is
-		   the only thing keeping the first heading out from under the bar. 3.5em
-		   leaves ~31px of clearance below it. */
-		#main > .row:first-child {
-			padding-top: 0;
-		}
-
-		.content {
-			padding-top: 3.5em;
-		}
-
-		.individual {
-			margin-top: 1.5em;
-		}
-
-		/* The "Content" list duplicates links to entries the reader has already
-		   scrolled past by the time it appears, since the single column puts it
-		   after all of them. */
-		.sidebar {
-			display: none;
-		}
-
-		/* Headings had no size rules at this breakpoint beyond the blanket 1.5em the
-		   template gives h2-h6, which left the page title (h1) at plain body size —
-		   smaller than the section headings under it — and section headings barely
-		   larger than the sub-headings they introduce. These restore the same order
-		   the wider breakpoints use: title > section > sub-heading. */
-		/* Same wrapping problem, worse here: with no line-height rule at this
-		   breakpoint the title inherited the body's, barely half the font size, so a
-		   long title's lines ran into each other and into the subtitle. (h2 already
-		   has a 1.25em line-height here and is left alone.) */
-		.box.page-content header h1 {
-			font-size: 2.75em;
-			line-height: 1.1em;
-		}
-
-		/* Title, location and role are one unit, but each carried the blanket 0.5em
-		   bottom margin (15px under the title, 10px under the location) which spread
-		   them out. The wider breakpoints use 0.1em here; these values give the same
-		   tight grouping at this font size. */
-		.box.page-content header h2 {
-			margin-bottom: 0.15em;
-		}
-
-		.box.page-content header h4 {
-			margin-bottom: 0.2em;
-		}
-
-		/* 2.25em matched the banner heading exactly, which read as top-heavy against
-		   it. Both wider breakpoints size section headings at 0.84x the banner;
-		   1.9em reproduces that ratio here. */
-		h2.major {
-			font-size: 1.9em;
-		}
-
-		/* 4em of footer padding put "Find me at" 97px below the content above it. */
-		#footer {
-			padding-top: 2em;
-		}
-
-			#footer > .row {
-				padding-top: 0;
-			}
-
-			#footer h2.major {
-				margin-top: 0;
-			}
-
-		.initial.h4 {
-			margin-top: 2.5em;
-		}
-
-		/* ...except when it directly follows a section heading, where the pair should
-		   read as one unit rather than being pushed apart. */
-		h3 + .initial.h4 {
-			margin-top: 0.5em;
-		}
-
-		.image.left.square,
-		.image.right.square,
-		.image.left.square.mini,
-		.image.right.square.mini,
-		.image.square.project {
-			float: none;
-			display: block;
-			width: 100%;
-			height: auto;
-			margin: 1em 0 1em 0;
-		}
-
-		.videos {
-			width: 100%;
-			height: auto;
-		}
-
-		/* Sized by width/height attributes in the markup, so cap them here. */
-		#main img,
-		#main video,
-		#main iframe {
-			max-width: 100%;
-		}
-
-		#main iframe {
-			aspect-ratio: 16 / 9;
-			height: auto;
-		}
-
-		/* Sidebar summaries: the generic rule above sizes every heading at 1.5em, which
-		   left the role (h5) bigger than the employer (h3) above it. Desktop and tablet
-		   both keep the role at body size, so match that and restore the hierarchy. */
-		.box.post-summary h5 {
-			font-size: 1em;
-		}
-
-		/* Nav panel indentation comes from an empty inline spacer span, which only
-		   offsets the first line, so wrapped entries lost their indent. Indent with
-		   padding on the link instead, giving every line of an entry the same offset. */
-		#navPanel .indent-1,
-		#navPanel .indent-2,
-		#navPanel .indent-3,
-		#navPanel .indent-4,
-		#navPanel .indent-5 {
-			display: none;
-		}
-
-		#navPanel .link.depth-1 {
-			padding-left: 2em;
-		}
-
-		#navPanel .link.depth-2 {
-			padding-left: 3em;
-		}
-
-		#navPanel .link.depth-3 {
-			padding-left: 4em;
-		}
-
-		#navPanel .link.depth-4 {
-			padding-left: 5em;
-		}
-
-		#navPanel .link.depth-5 {
-			padding-left: 6em;
-		}
 
 	}

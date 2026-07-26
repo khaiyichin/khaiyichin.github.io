@@ -17,13 +17,15 @@
 				href = $this.attr('href'),
 				target = $this.attr('target');
 
+			// Indentation comes from padding on .link.depth-N in the stylesheet. An
+			// empty inline spacer span was emitted here as well, but that only offsets
+			// the first line, so entries long enough to wrap lost their indent.
 			b.push(
 				'<a ' +
 					'class="link depth-' + indent + '"' +
 					( (typeof target !== 'undefined' && target != '') ? ' target="' + target + '"' : '') +
 					( (typeof href !== 'undefined' && href != '') ? ' href="' + href + '"' : '') +
 				'>' +
-					'<span class="indent-' + indent + '"></span>' +
 					$this.text() +
 				'</a>'
 			);
