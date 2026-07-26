@@ -7,6 +7,17 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+/*
+	THIS FILE IS THE SOURCE. There is no build step and no stylesheet is generated
+	from anything else — edit it directly.
+
+	The template shipped a Sass tree that produced an early version of this file. It
+	was never touched again while this file was edited by hand for years, so it no
+	longer described the site and compiling it would have silently reverted
+	everything. It has been removed; the original is in git history if the template's
+	source is ever wanted for reference.
+*/
+
 /*Personal edits*/
 	 .individual {
 				font-size: 2.25em;
@@ -1677,73 +1688,12 @@
 			padding-left: 0.25em;
 		}
 
-/* Forms */
-
-	form label {
-		display: block;
-		margin: 0 0 1em 0;
-		font-family: 'Open Sans Condensed', sans-serif;
-		font-weight: 700;
-		text-transform: uppercase;
-		color: #6b7770;
-	}
-
-	form input[type="text"],
-	form input[type="email"],
-	form input[type="password"],
-	form select,
-	form textarea {
-		-webkit-appearance: none;
-		display: block;
-		width: 100%;
-		border-radius: 8px;
-		border: solid 2px #E7EAE8;
-	}
-
-		form input[type="text"]:focus,
-		form input[type="email"]:focus,
-		form input[type="password"]:focus,
-		form select:focus,
-		form textarea:focus {
-			border-color: #a1cd9b;
-		}
-
-	form input[type="text"],
-	form input[type="email"],
-	form input[type="password"],
-	form select {
-		line-height: 3em;
-		padding: 0 1em;
-	}
-
-	form textarea {
-		min-height: 9em;
-		padding: 1em;
-	}
-
-	form .formerize-placeholder {
-		color: #555 !important;
-	}
-
-	form ::-webkit-input-placeholder {
-		color: #555 !important;
-	}
-
-	form :-moz-placeholder {
-		color: #555 !important;
-	}
-
-	form ::-moz-placeholder {
-		color: #555 !important;
-	}
-
-	form :-ms-input-placeholder {
-		color: #555 !important;
-	}
-
-	form ::-moz-focus-inner {
-		border: 0;
-	}
+/*
+	The template's form styling lived here. The site has no <form>, <input>,
+	<textarea>, <select> or <button> anywhere, and the matching placeholder
+	polyfill in util.js ran on every page load against nothing. Both removed;
+	git history has them if a form is ever added.
+*/
 
 /* Tables */
 
@@ -2491,14 +2441,9 @@
 					padding: 1em 0 2em 0;
 				}
 
-			#footer-wrapper h2.major {
-				margin: 0 0 1em 0;
-			}
-
-			/* The markup uses <footer id="footer">, so the #footer-wrapper rule above
-			   never matches. A small top margin only — the overlap this originally
-			   guarded against came from content spilling out of .content-right, which
-			   is now fixed at source, so this just keeps the -0.75em span clear. */
+			/* A small top margin only — the overlap this originally guarded against came
+			   from content spilling out of .content-right, which is now fixed at source,
+			   so this just keeps the -0.75em span clear. */
 			#footer h2.major {
 				margin: 0.3em 0 1em 0;
 			}
@@ -2755,18 +2700,20 @@
 		/* Sidebar + Content */
 
 			/* In a single column this list lands after every entry it links to, so it
-			   only repeats what the reader has already scrolled past. */
-			.sidebar {
+			   only repeats what the reader has already scrolled past. Hiding the grid
+			   column rather than the .sidebar inside it, because the column would
+			   otherwise survive as an empty block with the grid's top padding still
+			   applied. Derived with :has() so the markup does not have to name the
+			   relationship twice. */
+			#main > .row > div:has(> .sidebar) {
 				display: none;
 			}
 
+			/* The homepage has no .content element — its sections sit directly in the
+			   grid — so this only affects the interior pages. */
 			.content {
 				padding-top: 0.2em;
 			}
-
-				.homepage .content {
-					padding-top: 0;
-				}
 
 		/* Wrappers */
 
@@ -3048,27 +2995,17 @@
 						border-top: 0;
 					}
 
-				/* Indentation is applied as padding on .link.depth-N below, so that it
-				   applies to every line of an entry rather than only the first. The
-				   .indent-N spacer spans this used to style are no longer emitted. */
+				/* Indentation is applied as padding on .link.depth-N, so that it applies
+				   to every line of an entry rather than only the first (the .indent-N
+				   spacer spans this used to style are no longer emitted). The nav nests
+				   three <li> levels, so navList only ever emits depth-0 to depth-2; a
+				   deeper level would need another rule here. */
 				#navPanel .link.depth-1 {
 					padding-left: 2em;
 				}
 
 				#navPanel .link.depth-2 {
 					padding-left: 3em;
-				}
-
-				#navPanel .link.depth-3 {
-					padding-left: 4em;
-				}
-
-				#navPanel .link.depth-4 {
-					padding-left: 5em;
-				}
-
-				#navPanel .link.depth-5 {
-					padding-left: 6em;
 				}
 
 				#navPanel .depth-0 {
