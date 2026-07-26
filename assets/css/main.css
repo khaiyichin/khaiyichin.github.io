@@ -7,6 +7,17 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+/*
+	THIS FILE IS THE SOURCE. There is no build step and no stylesheet is generated
+	from anything else — edit it directly.
+
+	The template shipped a Sass tree that produced an early version of this file. It
+	was never touched again while this file was edited by hand for years, so it no
+	longer described the site and compiling it would have silently reverted
+	everything. It has been removed; the original is in git history if the template's
+	source is ever wanted for reference.
+*/
+
 /*Personal edits*/
 	 .individual {
 				font-size: 2.25em;
@@ -48,22 +59,63 @@
 		width: 275px;
 	}
 
+	/* Capped by height on wide screens (480px tall, as before) but by width once the
+	   column is narrower than the image, so it scales down instead of overflowing. */
 	span.image.center.large {
 		margin: 0.5em 0 0.5em 0;
-		height: 480px;
 		width: 100%;
 	}
 
 	span.image.center.large > img {
-		height: 100%;
+		display: block;
+		max-height: 480px;
+		max-width: 100%;
+		height: auto;
 		width: auto;
 		margin: 0 auto 0 auto;
-	}	
+	}
 	
 	.image.right.square.mini {
 		float: right;
 		height: 125px;
 		width: 125px;
+	}
+
+	/* Project thumbnails - smaller than the standard square. */
+	.image.square.project {
+		height: 200px;
+		width: 200px;
+		margin-bottom: 10px;
+	}
+
+	/* One project on the Projects page: body text left, thumbnail floated right.
+	   The min-height reserves room for that floated thumbnail on wide screens, where
+	   the section does not contain it. Below 1200px the section is a flow-root and
+	   sizes itself, so this has no effect there. Was an inline style on each section. */
+	.project-entry {
+		min-height: 10em;
+	}
+
+	/* A row of four images carries its gap as a margin on one side only, which puts
+	   all the leftover space at one end. Splitting the same gap symmetrically across
+	   both sides leaves the row centred by construction, with no leftover to measure
+	   and divide up. The gap between neighbours is unchanged: half from each.
+	   Narrower screens size these by percentage - see the 737-1200px block. */
+	@media screen and (min-width: 1201px) {
+
+		.work-experience .image.left.square:first-of-type:nth-last-of-type(4),
+		.work-experience .image.left.square:first-of-type:nth-last-of-type(4) ~ .image.left.square {
+			margin-left: 12.5px;
+			margin-right: 12.5px;
+		}
+
+			/* Text still flows beside the row at this width (there is no clear: left
+			   here), and the trailing margin would narrow that space just enough to
+			   push the paragraph's first word onto the next line. */
+			.work-experience .image.left.square:first-of-type:nth-last-of-type(4) ~ .image.left.square:last-of-type {
+				margin-right: 0;
+			}
+
 	}
 
 	.videos {
@@ -202,8 +254,27 @@
 			width: 240px;
 		}
 
+		/* Was a fixed 960px. Real tablets lay out at a 1080px viewport (forced by
+		   skel-viewport), so max-width still resolves to 960px there - unchanged.
+		   Below 960px, which only a resized desktop window reaches, this now
+		   reflows instead of overflowing horizontally. */
 		.container {
-			width: 960px;
+			width: 100%;
+			max-width: 960px;
+		}
+
+	}
+
+	/* The 960px-capped container above leaves little or no room at the window edges
+	   until the window itself is wider than 960 + 2*2em, so add the gutter by hand up
+	   to that point. Stops short of the 1080px tablet width, which is unaffected. */
+	@media screen and (min-width: 737px) and (max-width: 1023px) {
+
+		/* #main / #footer set their own padding by id, so match that specificity. */
+		#main.container,
+		#footer.container {
+			padding-left: 2em;
+			padding-right: 2em;
 		}
 
 	}
@@ -1265,6 +1336,16 @@
 		section > :last-child, section:last-child, article > :last-child, article:last-child {
 			margin-bottom: -25px;
 		}
+
+		/* The -25px above assumes the last child carries a matching positive bottom
+		   margin to cancel. Headings only have ~0.5em, so inside the sidebar summaries
+		   it over-corrects and drags the next item's divider up through this text.
+		   Both the summary article (as last child of its li) and its own last child
+		   pick up that rule, so neutralise each. */
+		ul.divided > li > article.box.post-summary,
+		ul.divided > li article.box.post-summary > :last-child {
+			margin-bottom: 0;
+		}
 		
 
 	header > p {
@@ -1607,73 +1688,12 @@
 			padding-left: 0.25em;
 		}
 
-/* Forms */
-
-	form label {
-		display: block;
-		margin: 0 0 1em 0;
-		font-family: 'Open Sans Condensed', sans-serif;
-		font-weight: 700;
-		text-transform: uppercase;
-		color: #6b7770;
-	}
-
-	form input[type="text"],
-	form input[type="email"],
-	form input[type="password"],
-	form select,
-	form textarea {
-		-webkit-appearance: none;
-		display: block;
-		width: 100%;
-		border-radius: 8px;
-		border: solid 2px #E7EAE8;
-	}
-
-		form input[type="text"]:focus,
-		form input[type="email"]:focus,
-		form input[type="password"]:focus,
-		form select:focus,
-		form textarea:focus {
-			border-color: #a1cd9b;
-		}
-
-	form input[type="text"],
-	form input[type="email"],
-	form input[type="password"],
-	form select {
-		line-height: 3em;
-		padding: 0 1em;
-	}
-
-	form textarea {
-		min-height: 9em;
-		padding: 1em;
-	}
-
-	form .formerize-placeholder {
-		color: #555 !important;
-	}
-
-	form ::-webkit-input-placeholder {
-		color: #555 !important;
-	}
-
-	form :-moz-placeholder {
-		color: #555 !important;
-	}
-
-	form ::-moz-placeholder {
-		color: #555 !important;
-	}
-
-	form :-ms-input-placeholder {
-		color: #555 !important;
-	}
-
-	form ::-moz-focus-inner {
-		border: 0;
-	}
+/*
+	The template's form styling lived here. The site has no <form>, <input>,
+	<textarea>, <select> or <button> anywhere, and the matching placeholder
+	polyfill in util.js ran on every page load against nothing. Both removed;
+	git history has them if a form is ever added.
+*/
 
 /* Tables */
 
@@ -1949,16 +1969,20 @@
 				margin: 0 0 0 0;
 			}
 			
+			/* line-height was 80%, i.e. shorter than the font itself. Fine for a title
+			   that fits on one line, but a wrapped one overflows its own box: the
+			   lines crowd each other and the last one lands on the subtitle below.
+			   1em keeps the tight look while giving each line its own space. */
 			.box.page-content h1 {
 				font-size: 3.5em;
 				margin: -0.35em 0 0.2em 0;
-				line-height: 80%;
+				line-height: 1em;
 			}
 
 			.box.page-content h2 {
 				font-size: 3em;
 				margin: -0.35em 0 0.1em 0;
-				line-height: 80%;
+				line-height: 1em;
 			}
 
 			.box.page-content header > p {
@@ -1993,6 +2017,9 @@
 				padding-right: 2em;
 			}
 
+			/* The negative margin trims trailing space above the footer on wide screens.
+			   It is too aggressive below 1200px, where #main has less bottom padding —
+			   see the override in the 737-1200px block. */
 			.content-right {
 				padding-left: 2em;
 				margin-bottom: -150px;
@@ -2231,8 +2258,9 @@
 
 		/* Basic */
 
+			/* min-width dropped: it forced a horizontal scrollbar on desktop windows
+			   narrower than 960px. Real tablets lay out at 1080px and are unaffected. */
 			body {
-				min-width: 960px;
 				font-size: 10.25pt;
 				line-height: 1.75em;
 			}
@@ -2242,19 +2270,117 @@
 				line-height: 1.75em;
 			}
 
+			/* The span below is shifted up 0.75em AND the grid rows let content spill
+			   ~25px past their box, so the span's opaque background lands on the last
+			   line of the previous section. 2em is the measured point where the
+			   painted overlap reaches zero (0.75em only got it from 39px to 15px). */
 			h2.major {
-				margin: 0 0 0.5em 0;
+				margin: 2em 0 0.5em 0;
 			}
 
+				/* ...but the first section has nothing above it to clear, so the 2em is
+				   just dead space at the top of the page. */
+				#main > .row:first-child h2.major {
+					margin-top: 0;
+				}
+
+				/* Was padding: 0.6em 1em 0 1em — top padding but no bottom, which pushed
+				   the text 9px below the centre of the rule it sits on.
+
+				   The offset differs from the -0.5em used above 1200px because it has to
+				   centre glyphs, not boxes, and the font's ascent/descent do not scale
+				   with the heading size. translateY(-50%) is the obvious font-independent
+				   alternative but measures worse (2.0px off centre, against 0.2px here),
+				   because it centres the line box rather than the text within it. A
+				   properly derived version needs the rule drawn as a flex pseudo-element
+				   instead of a background the span masks. */
 				h2.major span {
-					top: -0.75em;
-					padding: 0.6em 1em 0 1em;
+					top: -0.44em;
+					padding: 0 1em 0 1em;
+				}
+
+		/* Sidebar + Content */
+
+			/* Cancels the -150px above: at these widths it pulled the last entry's
+			   text down past #main and into the footer band. */
+			.content-right {
+				margin-bottom: 0;
+			}
+
+		/* Anchor targets */
+
+			/* The nav is fixed, and at this breakpoint these sections carry only 5px
+			   of internal padding (50px on desktop), so jumping to one left its
+			   heading tucked under the nav bar. 90px puts the heading 50px below the
+			   nav, the same landing desktop gets. */
+			#background,
+			#wpi,
+			#ut,
+			#uofm,
+			#sunway {
+				scroll-margin-top: 90px;
+			}
+
+		/* Images */
+
+			/* These sections are shorter than the thumbnail they float, so the
+			   thumbnail overhung into the next entry and blocked the right margin
+			   there — the following thumbnail then got bumped a full column left
+			   instead of sitting flush right. Containing the float fixes the
+			   overhang and gives each entry a clean text-left/image-right pair. */
+			.project-entry,
+			section.introduction {
+				display: flow-root;
+			}
+
+			/* Same containment problem: the fixed height was shorter than the image,
+			   so the intro image overhung and left only ~18px before the first
+			   section heading. Auto height plus a real bottom margin puts that gap
+			   in line with the spacing between the later sections.
+
+			   The margin is smaller than the 5.5em `section, article` default because
+			   this box ends at the floated image rather than at text, so the -25px on
+			   its last child never reaches the bottom edge to trim it the way it does
+			   for the sections below. Deriving it as calc(5.5em - 25px) overshoots by
+			   ~9px; this is tuned to the gap the later sections actually show. */
+			section.introduction {
+				height: auto;
+				margin-bottom: 3em;
+			}
+
+				section.introduction .image.square {
+					width: 230px;
+					height: 230px;
+				}
+
+			/* Four thumbnails in a row need ~1175px at the standard 275px, more than
+			   the column has here, so they wrapped into a clumped 2x2. Sizing them by
+			   percentage keeps all four on one row at any width in this range, and
+			   splitting the gap symmetrically across both sides centres the row by
+			   construction rather than by measuring the leftover. The quantity
+			   selector applies this only to runs of exactly four. */
+			.work-experience .image.left.square:first-of-type:nth-last-of-type(4),
+			.work-experience .image.left.square:first-of-type:nth-last-of-type(4) ~ .image.left.square {
+				width: 23%;
+				height: auto;
+				margin: 0.5em 1%;
+			}
+
+				/* The four together leave a sliver too narrow to hold words, which
+				   stranded a two-word line beside them. Start the text below instead. */
+				.work-experience .image.left.square:first-of-type:nth-last-of-type(4) ~ p {
+					clear: left;
 				}
 
 		/* Wrappers */
 
+			/* The 35px green border is set once in the base rules and never scaled, so
+			   at this breakpoint the bar above the banner stayed thicker than the one
+			   below it — and thicker than the top bar on every other page, which comes
+			   from #main-wrapper. Match it. */
 			#banner-wrapper {
 				padding: 6em 0 6em 0;
+				border-top-width: 20px;
 			}
 
 			#main-wrapper {
@@ -2264,8 +2390,12 @@
 
 		/* Header */
 
+			/* These ems resolve against the logo's much larger font-size at this
+			   breakpoint, so 4em/1em rendered as 164px/41px and left the page title
+			   marooned in white space. 2.25em/0 matches the ~92px the desktop rule
+			   produces. */
 			#header {
-				padding: 4em 0 1em 0;
+				padding: 2.25em 0 0 0;
 			}
 
 		/* Banner */
@@ -2292,6 +2422,14 @@
 					padding: 2em 0 0 0;
 				}
 
+					/* This row padding has no equivalent in the desktop rules, so it was
+					   adding a second gap under the green bar on top of #main's own
+					   padding, on every page. Keep it between rows, drop it above the
+					   first one. */
+					#main > .row:first-child {
+						padding-top: 0;
+					}
+
 		/* Footer */
 
 			#footer {
@@ -2300,17 +2438,22 @@
 			}
 
 				#footer > .row {
-					padding: 2em 0 2em 0;
+					padding: 1em 0 2em 0;
 				}
 
-			#footer-wrapper h2.major {
-				margin: 0 0 1em 0;
+			/* A small top margin only — the overlap this originally guarded against came
+			   from content spilling out of .content-right, which is now fixed at source,
+			   so this just keeps the -0.75em span clear. */
+			#footer h2.major {
+				margin: 0.3em 0 1em 0;
 			}
 
 		/* Copyright */
 
+			/* Was 0, which let the copyright bar ride up under the contact icons and
+			   hide part of its own text. Kept tighter than the desktop 4em. */
 			#copyright {
-				margin: 0;
+				margin: 3em 0 0 0;
 			}
 
 	}
@@ -2322,6 +2465,13 @@
 	}
 
 	@media screen and (max-width: 736px) {
+
+		/* The off-canvas title bar is fixed, so it sits over the top of the page.
+		   Anything that needs to clear it refers to this rather than repeating the
+		   number. */
+		:root {
+			--titlebar-height: 44px;
+		}
 
 		/* Basic */
 
@@ -2340,8 +2490,32 @@
 				margin: 0 0 0.5em 0;
 			}
 
+			/* The blanket rule above zeroes the top margin, which left these section
+			   headings sitting against the text of the section before them. */
+			.individual {
+				margin-top: 1.5em;
+			}
+
+			.initial.h4 {
+				margin-top: 2.5em;
+			}
+
+				/* ...except directly after any heading, where the two belong together
+				   and the separation would push them apart. */
+				h1 + .initial.h4,
+				h2 + .initial.h4,
+				h3 + .initial.h4,
+				h4 + .initial.h4,
+				h5 + .initial.h4 {
+					margin-top: 0.5em;
+				}
+
+			/* Without a size of its own a section heading took the blanket 1.5em above,
+			   matching the banner heading exactly and reading as top-heavy against it.
+			   Both wider breakpoints size section headings at 0.84x the banner. */
 			h2.major {
 				text-align: left;
+				font-size: 1.9em;
 				margin: 0.775em 0 0.75em 0;
 			}
 
@@ -2446,6 +2620,13 @@
 					font-size: 1.25em;
 				}
 
+					/* The blanket 1.5em above would otherwise make the role larger than
+					   the employer it belongs to. Both wider breakpoints keep the role
+					   at body size. */
+					.box.post-summary h5 {
+						font-size: 1em;
+					}
+
 			.box.post h3 {
 				font-size: 2.25em;
 				line-height: 1.25em;
@@ -2470,6 +2651,25 @@
 				margin: 0 0 0.5em 0;
 			}
 
+			/* The page title had no size or line-height of its own here, so it fell
+			   back to body size — smaller than the section headings beneath it — and
+			   inherited a line-height barely half its font size, which made a wrapped
+			   title collide with itself and with the subtitle. */
+			.box.page-content header h1 {
+				font-size: 2.75em;
+				line-height: 1.1em;
+			}
+
+			/* Title, location and role form one unit; the blanket 0.5em bottom margin
+			   resolves to 15px and 10px at these font sizes and spreads them apart. */
+			.box.page-content header h2 {
+				margin-bottom: 0.15em;
+			}
+
+			.box.page-content header h4 {
+				margin-bottom: 0.2em;
+			}
+
 			.box.page-content header > p {
 				margin: 0 0 0.75em 0;
 			}
@@ -2478,40 +2678,50 @@
 				margin: 0 0 0.5em 0;
 			}
 
+			/* Space above rather than below, so each title groups with the entry it
+			   introduces instead of the one above it.
+
+			   The top value is written as the gap actually wanted plus the 25px that
+			   `article > :last-child { margin-bottom: -25px }` further up swallows when
+			   this margin collapses against the previous entry. Written as a plain 5em
+			   the number claims a separation nearly twice what it produces. */
 			.box.page-content header {
-				margin: 0 0 3em 0;
+				margin: calc(3.125em + 25px) 0 1em 0;
 			}
+
+				/* On the page's first entry that leading space is just a gap below the
+				   title bar. :first-of-type is essential — <header> is the first child
+				   of every entry's <article>, so :first-child alone would strip the
+				   margin from all of them. */
+				.box.page-content:first-of-type > header:first-child {
+					margin-top: 0;
+				}
 
 		/* Sidebar + Content */
 
-			.sidebar {
-				border-top: solid 2px #e7eae8;
-				padding-top: 5em;
-				margin-top: 5em;
-				border-bottom: solid 2px #e7eae8;
-				padding-bottom: 5em;
+			/* In a single column this list lands after every entry it links to, so it
+			   only repeats what the reader has already scrolled past. Hiding the grid
+			   column rather than the .sidebar inside it, because the column would
+			   otherwise survive as an empty block with the grid's top padding still
+			   applied. Derived with :has() so the markup does not have to name the
+			   relationship twice. */
+			#main > .row > div:has(> .sidebar) {
+				display: none;
 			}
 
-				.sidebar > section {
-					margin: 0 0 5em 0 !important;
-				}
-
-					.sidebar > section:last-child {
-						margin: 0 !important;
-					}
-
+			/* The homepage has no .content element — its sections sit directly in the
+			   grid — so this only affects the interior pages. */
 			.content {
-				padding-top: 3em;
+				padding-top: 0.2em;
 			}
-
-				.homepage .content {
-					padding-top: 0;
-				}
 
 		/* Wrappers */
 
+			/* Same unscaled 35px base border as at the wider breakpoints; match the
+			   homepage's own 15px bar below the banner. */
 			#banner-wrapper {
 				padding: 9em 0 5em 0;
+				border-top-width: 15px;
 			}
 
 			#main-wrapper {
@@ -2521,6 +2731,16 @@
 
 				.homepage #main-wrapper {
 					border-top-width: 15px;
+				}
+
+				/* #page-wrapper has no padding of its own, so without this the first
+				   heading would sit underneath the fixed title bar. The padding goes
+				   here rather than on #page-wrapper so that this wrapper's white
+				   background still starts at the top of the page — the bar is only 80%
+				   opaque and the body behind it is grey. The homepage is excluded
+				   because its banner is meant to run under the bar. */
+				body:not(.homepage) #main-wrapper {
+					padding-top: var(--titlebar-height);
 				}
 
 		/* Header */
@@ -2562,15 +2782,65 @@
 					padding: 2em 0 2em 0;
 				}
 
+					/* Between rows this is section spacing, but above the first row it
+					   just adds to the gap under the title bar. */
+					#main > .row:first-child {
+						padding-top: 0;
+					}
+
+			/* Media carry width/height attributes or fixed sizes from the rules near
+			   the top of this file, both of which exceed a phone's column. */
+			#main img,
+			#main video,
+			#main iframe {
+				max-width: 100%;
+			}
+
+				#main iframe {
+					aspect-ratio: 16 / 9;
+					height: auto;
+				}
+
+			/* The fixed pixel sizes in the personal-edits block near the top of this
+			   file assume a desktop-width column. The phone column is only ~335px, so
+			   a 275px float leaves too little beside it for text, and the intro's
+			   fixed height is shorter than the image it contains. */
+			section.introduction {
+				height: auto;
+			}
+
+			.image.left.square,
+			.image.right.square,
+			.image.left.square.mini,
+			.image.right.square.mini,
+			.image.square.project {
+				float: none;
+				display: block;
+				width: 100%;
+				height: auto;
+				margin: 1em 0 1em 0;
+			}
+
+			.videos {
+				width: 100%;
+				height: auto;
+			}
+
 		/* Footer */
 
 			#footer {
-				padding: 4em 20px 2em 20px;
+				padding: 2em 20px 2em 20px;
 			}
 
 				#footer > .row {
-					padding: 1em 0 1em 0;
+					padding: 0 0 1em 0;
 				}
+
+					/* The heading's span is shifted up over the rule it sits on; the
+					   padding above already provides the separation. */
+					#footer h2.major {
+						margin-top: 0;
+					}
 
 		/* Copyright */
 
@@ -2607,7 +2877,7 @@
 				-ms-transition: -ms-transform 0.5s ease;
 				transition: transform 0.5s ease;
 				display: block;
-				height: 44px;
+				height: var(--titlebar-height);
 				left: 0;
 				position: fixed;
 				top: 0;
@@ -2624,7 +2894,7 @@
 					font-weight: 700;
 					text-transform: uppercase;
 					font-size: 1.25em;
-					line-height: 44px;
+					line-height: var(--titlebar-height);
 					color: #fff;
 					z-index: 1000;
 					text-align: center;
@@ -2708,9 +2978,14 @@
 					display: block;
 					color: inherit;
 					text-decoration: none;
-					height: 44px;
-					line-height: 44px;
-					padding: 0 1em 0 1em;
+					/* Was a fixed 44px tall with a 44px line-height, so any label too long
+					   for the 275px panel wrapped onto a second line that spilled out and
+					   overprinted the next entry. Grows instead, keeping the 44px look
+					   for entries that fit on one line. */
+					height: auto;
+					min-height: 44px;
+					line-height: 1.5em;
+					padding: 0.65em 1em 0.65em 1em;
 					color: #888;
 					color: rgba(255, 255, 255, 0.5);
 					border-top: solid 2px rgba(87, 93, 89, 0.15);
@@ -2720,29 +2995,17 @@
 						border-top: 0;
 					}
 
-				#navPanel .indent-1 {
-					display: inline-block;
-					width: 1em;
+				/* Indentation is applied as padding on .link.depth-N, so that it applies
+				   to every line of an entry rather than only the first (the .indent-N
+				   spacer spans this used to style are no longer emitted). The nav nests
+				   three <li> levels, so navList only ever emits depth-0 to depth-2; a
+				   deeper level would need another rule here. */
+				#navPanel .link.depth-1 {
+					padding-left: 2em;
 				}
 
-				#navPanel .indent-2 {
-					display: inline-block;
-					width: 2em;
-				}
-
-				#navPanel .indent-3 {
-					display: inline-block;
-					width: 3em;
-				}
-
-				#navPanel .indent-4 {
-					display: inline-block;
-					width: 4em;
-				}
-
-				#navPanel .indent-5 {
-					display: inline-block;
-					width: 5em;
+				#navPanel .link.depth-2 {
+					padding-left: 3em;
 				}
 
 				#navPanel .depth-0 {

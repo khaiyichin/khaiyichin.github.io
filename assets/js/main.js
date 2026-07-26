@@ -5,7 +5,7 @@
 */
 
 /* Update variable 'update_date' whenever changes to website is made */
-var update_date = "June 2025";
+var update_date = "July 2026";
 //
 //window.onload = function() {
 //	//when the document is finished loading, replace everything
@@ -42,9 +42,6 @@ var update_date = "June 2025";
 				$body.removeClass('is-loading');
 			});
 
-		// Fix: Placeholder polyfill.
-			$('form').placeholder();
-
 		// Prioritize "important" elements on mobile.
 			skel.on('+mobile -mobile', function() {
 				$.prioritize(
@@ -52,10 +49,6 @@ var update_date = "June 2025";
 					skel.breakpoint('mobile').active
 				);
 			});
-
-		// CSS polyfills (IE<9).
-			if (skel.vars.IEVersion < 9)
-				$(':last-child').addClass('last-child');
 
 		// Dropdowns.
 			$('#nav>ul').dropotron({
@@ -95,11 +88,6 @@ var update_date = "June 2025";
 						target: $body,
 						visibleClass: 'navPanel-visible'
 					});
-
-			// Fix: Remove navPanel transitions on WP<10 (poor/buggy performance).
-				if (skel.vars.os == 'wp' && skel.vars.osVersion < 10)
-					$('#titleBar, #navPanel, #page-wrapper')
-						.css('transition', 'none');
 
 	});
 
