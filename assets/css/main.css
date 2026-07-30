@@ -166,7 +166,16 @@
 		height: 300px;
 		background: #000000;
 	}
-	
+
+	/* A video clip and the line that captions it are one list item, and both video
+	   and iframe are inline by default - so a caption short enough to leave room
+	   beside it put the media on the same line, indented by the width of the text.
+	   As blocks they each start on their own line whatever the caption's length. */
+	#main video,
+	#main iframe {
+		display: block;
+	}
+
 	.initial.h4 {
 		font-size: 25px;
 		margin-top: 20px;
@@ -1520,14 +1529,20 @@
 
 /* List */
 
+	/* list-style because the reset above clears it from every ul.
+
+	   The padding reserves room for the marker, which is painted outside the item's
+	   border box - so it is the list's padding, not the item's, that keeps the
+	   bullets inside the text column. The template's 1em was narrower than the
+	   ~1.26em Chrome leaves for the marker, which put the bullets back outside the
+	   column and clipped them off the page on a window just over 1200px wide, where
+	   the fixed-width container leaves less margin than that. 1.5em covers the
+	   overhang; the item's own 0.5em was folded into it so the text still starts at
+	   the same 1.5em. */
 	ul.default {
 		list-style: disc;
-		padding-left: 1em;
+		padding-left: 1.5em;
 	}
-
-		ul.default li {
-			padding-left: 0.5em;
-		}
 
 	ul.divided > li {
 		border-top: solid 2px #e7eae8;

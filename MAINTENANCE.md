@@ -55,7 +55,9 @@ good model — and rename it. The page skeleton is:
   <section>
     <h3 class="individual">External Links and Materials</h3>
     <h4 class="initial h4">Links</h4>
-    <li><a href="...">...</a></li>
+    <ul class="default">
+      <li><a href="...">...</a></li>
+    </ul>
   </section>
 </article>
 ```
@@ -66,6 +68,12 @@ Use these classes as-is — they are what the responsive rules key off:
 - `section.work-experience.section` — each body section.
 - `h3.individual` — section headings.
 - `h4.initial.h4` — sub-headings.
+- `ul.default` — bulleted lists. The reset strips markers from every `ul`, so a
+  plain `<ul>` renders without bullets; this class puts them back and reserves the
+  room they need. Do not write a bare `<li>` with no list around it.
+- `section.subsection` — a `<section>` nested inside another, for content that
+  belongs to its parent rather than standing beside it (see `interests.html`). It
+  clears the parent's floated photos and carries its own heading spacing.
 - `span.image.left.square` / `span.image.right.square` — photos (275px on desktop,
   full width on phones).
 
