@@ -29,10 +29,46 @@
 		text-align: justify;
 	}
 	
+	/* flow-root so the section contains its floated images. A plain block sizes
+	   itself from its text alone, so a photo floated beside the last paragraph
+	   hangs past the section's bottom edge and lands in the next section - which
+	   is what pushed the Music images down into "Compositions". Containing the
+	   float makes each section end below everything it holds. */
 	.interests.section {
+		display: flow-root;
 		text-align: justify;
 	}
-	
+
+	/* A section nested inside another one, for content that belongs to its parent
+	   rather than standing alongside it. Two things follow from being inside:
+
+	   clear - the parent's floated photos are still live at this point, so the
+	   heading's line box would otherwise wrap around one and sit across it. (A
+	   flow-root here would not help: a block that establishes its own formatting
+	   context is placed beside a float, narrowed, rather than below it.)
+
+	   The bottom needs nothing: as its parent's last child it picks up the same
+	   -25px gutter arithmetic from `section > :last-child` that it had as a
+	   top-level section, and the parent's own 5.5em is the break from what follows.
+
+	   The 20px above the heading is padding rather than a margin because clearance
+	   puts the border edge at the float's bottom and swallows whatever margin sits
+	   above it - the heading ended up 7px under the photo. Padding is inside the
+	   border edge, so it survives, and it reads the same whether a float is above
+	   or not. 20px is what h4.initial.h4 carries, so the rhythm matches the
+	   sub-headings on the work experience pages. */
+	.subsection {
+		clear: both;
+		padding-top: 20px;
+	}
+
+		/* The padding is the gap now; the heading's own margin would double it. The
+		   selector names the element so it outranks .initial.h4, which sets that
+		   margin and sits further down this file. */
+		.subsection > h4:first-child {
+			margin-top: 0;
+		}
+
 	section.introduction {
 		margin-top: 10px;
 		text-align: justify;
@@ -109,11 +145,18 @@
 			margin-right: 12.5px;
 		}
 
-			/* Text still flows beside the row at this width (there is no clear: left
-			   here), and the trailing margin would narrow that space just enough to
-			   push the paragraph's first word onto the next line. */
+			/* Dropping the trailing margin keeps the four margin boxes under the
+			   column width, so the fourth image cannot wrap onto a second row. */
 			.work-experience .image.left.square:first-of-type:nth-last-of-type(4) ~ .image.left.square:last-of-type {
 				margin-right: 0;
+			}
+
+			/* Centring the row leaves a sliver to its right, and text flowing around
+			   the floats will start there if the paragraph's first word happens to fit
+			   — which only a bare "I" does, stranding it beside the images. Start the
+			   text below the row instead, as the narrower breakpoint already does. */
+			.work-experience .image.left.square:first-of-type:nth-last-of-type(4) ~ p {
+				clear: left;
 			}
 
 	}
@@ -123,7 +166,16 @@
 		height: 300px;
 		background: #000000;
 	}
-	
+
+	/* A video clip and the line that captions it are one list item, and both video
+	   and iframe are inline by default - so a caption short enough to leave room
+	   beside it put the media on the same line, indented by the width of the text.
+	   As blocks they each start on their own line whatever the caption's length. */
+	#main video,
+	#main iframe {
+		display: block;
+	}
+
 	.initial.h4 {
 		font-size: 25px;
 		margin-top: 20px;
@@ -1477,14 +1529,20 @@
 
 /* List */
 
+	/* list-style because the reset above clears it from every ul.
+
+	   The padding reserves room for the marker, which is painted outside the item's
+	   border box - so it is the list's padding, not the item's, that keeps the
+	   bullets inside the text column. The template's 1em was narrower than the
+	   ~1.26em Chrome leaves for the marker, which put the bullets back outside the
+	   column and clipped them off the page on a window just over 1200px wide, where
+	   the fixed-width container leaves less margin than that. 1.5em covers the
+	   overhang; the item's own 0.5em was folded into it so the text still starts at
+	   the same 1.5em. */
 	ul.default {
 		list-style: disc;
-		padding-left: 1em;
+		padding-left: 1.5em;
 	}
-
-		ul.default li {
-			padding-left: 0.5em;
-		}
 
 	ul.divided > li {
 		border-top: solid 2px #e7eae8;
