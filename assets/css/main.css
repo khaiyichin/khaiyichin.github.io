@@ -1420,6 +1420,15 @@
 			display: block;
 			width: 100%;
 			border-radius: 8px;
+			/* An image that fails to load draws its alt text inside its own box, styled
+			   by the img's own text properties. Without these it inherits whatever the
+			   surrounding prose uses - justified, full size - and the fallback sprawls
+			   well past the space the picture would have filled. Left-aligned and
+			   smaller, it stays roughly in place. Both are inert once the image loads,
+			   since replaced content ignores them. */
+			text-align: left;
+			font-size: 0.8em;
+			line-height: 1.4;
 		}
 
 		.image:before {
